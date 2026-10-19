@@ -148,6 +148,11 @@
   .links a{ font-size:14px; font-weight:600; color:var(--text); border-bottom:1px solid var(--amber); padding-bottom:1px; transition:color .15s; }
   .links a:hover{ color:var(--amber); }
 
+  .coldnote{ display:flex; align-items:center; gap:10px; margin-bottom:18px; padding:12px 16px; border:1px solid var(--line-2); border-left:3px solid var(--amber); border-radius:12px; background:var(--card); font-size:14px; color:var(--muted); }
+  .coldnote svg{ width:18px; height:18px; color:var(--amber); flex:none; }
+  .coldnote b{ color:var(--text); font-weight:600; }
+  a.media.code{ display:grid; }
+
   /* skills */
   .skills{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
   .skill{ padding:26px; border:1px solid var(--line); border-radius:18px; background:var(--card); transition:border-color .25s, transform .25s; }
@@ -334,7 +339,8 @@
   <!-- PROJECTS -->
   <section id="projects">
     <div class="wrap">
-      <div class="sec-head rv"><span class="eyebrow">Projects</span><h2>Things I've <em>built</em></h2><p class="sec-lede">One is live, a few have screenshots, and the rest are code-first. Filter by what you care about.</p></div>
+      <div class="sec-head rv"><span class="eyebrow">Projects</span><h2>Things I've <em>built</em></h2><p class="sec-lede">Four are deployed and open to try, a few have screenshots, and the rest are code-first. Filter by what you care about.</p></div>
+      <p class="coldnote rv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>Live demos are hosted on free servers that fall asleep when idle. The <b>first open can take up to a minute</b>; after that they are fast.</span></p>
       <div class="filters rv" role="group" aria-label="Filter projects">
         <button class="filter" type="button" data-filter="all" aria-pressed="true">All</button>
         <button class="filter" type="button" data-filter="backend" aria-pressed="false">Backend</button>
@@ -375,6 +381,38 @@
           </div>
         </li>
 
+        <li class="card rv" data-cat="backend">
+          <a class="media" href="https://employee-management-4-sbe5.onrender.com" target="_blank" rel="noopener" aria-label="Open the Employee Management live demo"><span class="stat-tag live">Live</span><img src="assets/work/employee.webp" alt="Employee Management sign-in page" width="1360" height="575" loading="lazy"></a>
+          <div class="body">
+            <h3>Employee management</h3>
+            <p>Role-based access, admin user management, validation and caching in a Dockerised Spring Boot app, deployed on Render.</p>
+            <ul class="chips"><li>Spring Security</li><li>MongoDB</li><li>Docker</li></ul>
+            <div class="links"><a href="https://employee-management-4-sbe5.onrender.com" target="_blank" rel="noopener" title="Hosted on Render's free plan, so the first open can take up to a minute">Live demo</a><a href="https://github.com/Nazmul142965/employee-management" target="_blank" rel="noopener">Source</a></div>
+          </div>
+        </li>
+
+        <li class="card rv" data-cat="backend">
+          <a class="media code" href="https://subscript-pro-4suq.onrender.com" target="_blank" rel="noopener" aria-label="Open the SubScript live demo"><span class="stat-tag live">Live</span><pre><b>GET </b> /timeline
+<b>GET </b> /admin/users
+<span style="color:var(--dim)">fields</span> amount, category, billingDate</pre></a>
+          <div class="body">
+            <h3>SubScript</h3>
+            <p>A subscription tracker with a billing timeline, user sign-up and an admin who can block users. Deployed on Render.</p>
+            <ul class="chips"><li>Spring Security</li><li>MySQL</li><li>Docker</li></ul>
+            <div class="links"><a href="https://subscript-pro-4suq.onrender.com" target="_blank" rel="noopener" title="Hosted on Render's free plan, so the first open can take up to a minute">Live demo</a><a href="https://github.com/Nazmul142965/SubScript" target="_blank" rel="noopener">Source</a></div>
+          </div>
+        </li>
+
+        <li class="card rv" data-cat="backend">
+          <a class="media" href="https://clubeventproposal.onrender.com/club-event-proposal" target="_blank" rel="noopener" aria-label="Open the Club Event Proposal live demo"><span class="stat-tag live">Live</span><img src="assets/work/club.webp" alt="Club Event Proposal portal with the new-proposal form" width="1360" height="765" loading="lazy"></a>
+          <div class="body">
+            <h3>Club event proposals</h3>
+            <p>A portal where clubs submit event proposals and see every saved record. Packaged as a non-root Docker image and deployed on Render.</p>
+            <ul class="chips"><li>Java 21</li><li>MongoDB</li><li>Docker</li></ul>
+            <div class="links"><a href="https://clubeventproposal.onrender.com/club-event-proposal" target="_blank" rel="noopener" title="Hosted on Render's free plan, so the first open can take up to a minute">Live demo</a><a href="https://github.com/Nazmul142965/ClubEventProposal" target="_blank" rel="noopener">Source</a></div>
+          </div>
+        </li>
+
         <li class="card rv" data-cat="ai">
           <div class="media"><span class="stat-tag res">Research</span><img src="assets/work/brain-results.webp" alt="Training and validation curves of the MRI model" width="1200" height="1200" loading="lazy"></div>
           <div class="body">
@@ -402,42 +440,6 @@
             <p>A research poster explaining how attention works, the core operation inside transformers. Typeset in LaTeX at the Department of Computer Science, Southeast University.</p>
             <ul class="chips"><li>LaTeX</li><li>Transformers</li></ul>
             <div class="links"><a href="https://github.com/Nazmul142965/Attention-In-Poster" target="_blank" rel="noopener">Poster</a></div>
-          </div>
-        </li>
-
-        <li class="card rv" data-cat="backend">
-          <div class="media code"><pre><b>GET </b> /employees
-<b>POST</b> /employees/edit/{id}
-<b>POST</b> /admin/users/toggle/{id}</pre></div>
-          <div class="body">
-            <h3>Employee management</h3>
-            <p>Role-based access, admin user management, validation and caching in a Dockerised Spring Boot app.</p>
-            <ul class="chips"><li>Spring Security</li><li>MongoDB</li><li>Docker</li></ul>
-            <div class="links"><a href="https://github.com/Nazmul142965/employee-management" target="_blank" rel="noopener">Source</a></div>
-          </div>
-        </li>
-
-        <li class="card rv" data-cat="backend">
-          <div class="media code"><pre><b>GET </b> /timeline
-<b>GET </b> /admin/users
-<span style="color:var(--dim)">fields</span> amount, category, billingDate</pre></div>
-          <div class="body">
-            <h3>SubScript</h3>
-            <p>A subscription tracker with a billing timeline, user sign-up and an admin who can block users.</p>
-            <ul class="chips"><li>Spring Security</li><li>MySQL</li><li>Docker</li></ul>
-            <div class="links"><a href="https://github.com/Nazmul142965/SubScript" target="_blank" rel="noopener">Source</a></div>
-          </div>
-        </li>
-
-        <li class="card rv" data-cat="backend">
-          <div class="media code"><pre><b>GET </b> /club-event-proposal
-<b>POST</b> /club-event-proposal/save
-<b>POST</b> /club-event-proposal/delete/{id}</pre></div>
-          <div class="body">
-            <h3>Club event proposals</h3>
-            <p>Proposal intake for club events, packaged as a non-root Docker image and ready for Render.</p>
-            <ul class="chips"><li>Java 21</li><li>MongoDB</li><li>Docker</li></ul>
-            <div class="links"><a href="https://github.com/Nazmul142965/ClubEventProposal" target="_blank" rel="noopener">Source</a></div>
           </div>
         </li>
 
