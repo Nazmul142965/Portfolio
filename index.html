@@ -10,220 +10,211 @@
 <meta property="og:title" content="Nazmul Hasan — Software Engineer">
 <meta property="og:description" content="Backends in Java, Spring Boot and Go, applied AI, and the systems underneath.">
 <meta name="twitter:card" content="summary">
-<meta name="theme-color" content="#0B130F">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%2300674B'/%3E%3Ccircle cx='32' cy='32' r='17' fill='%23F23048'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#0A0A0B">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230A0A0B'/%3E%3Cpath d='M18 46V18h6l16 20V18h6v28h-6L24 26v20z' fill='%23EDEDEF'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Hind+Siliguri:wght@500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Hind+Siliguri:wght@500&display=swap" rel="stylesheet">
+<script>
+  (function(){
+    var r = document.documentElement; r.classList.add('js');
+    try{ if(localStorage.getItem('theme_v4') === 'light') r.setAttribute('data-theme','light'); }catch(e){}
+  })();
+</script>
 <style>
+  /* dark premium is the default; light editorial is the same system, inverted */
   :root{
-    --green:#00674B; --green-deep:#00402E; --red:#F23048;
-    --paper:#EEF0EA; --paper-2:#E0E4DB; --ink:#0B130F; --ink-2:#16211B;
-    --font:'Archivo','Segoe UI',sans-serif; --bn:'Hind Siliguri','Segoe UI',sans-serif; --mono:'JetBrains Mono',ui-monospace,Consolas,monospace;
+    --bg:#0A0A0B; --surface:#111113; --surface-2:#18181B; --line:#232327; --line-2:#323238;
+    --text:#EDEDEF; --muted:#8E8E98; --faint:#5E5E68; --accent:#7C9CFF; --on-accent:#0A0A0B;
+    --serif:'Instrument Serif', 'Times New Roman', serif;
+    --sans:'Geist','Segoe UI',system-ui,sans-serif;
+    --mono:'Geist Mono',ui-monospace,Consolas,monospace;
+    --bn:'Hind Siliguri','Segoe UI',sans-serif;
+    --shadow:0 30px 60px -30px rgba(0,0,0,.8);
+    color-scheme:dark;
+  }
+  :root[data-theme="light"]{
+    --bg:#F7F7F5; --surface:#FFFFFF; --surface-2:#F0F0ED; --line:#E4E4DF; --line-2:#D2D2CB;
+    --text:#111113; --muted:#5F5F68; --faint:#8F8F97; --accent:#2F4BDB; --on-accent:#FFFFFF;
+    --shadow:0 30px 60px -34px rgba(17,17,19,.35);
+    color-scheme:light;
   }
   *{ box-sizing:border-box; margin:0; padding:0; }
-  html{ scroll-behavior:smooth; scroll-padding-top:72px; }
-  body{ font-family:var(--font); font-size:18px; line-height:1.55; color:var(--ink); background:var(--paper); overflow-x:hidden; -webkit-font-smoothing:antialiased; }
+  html{ scroll-behavior:smooth; scroll-padding-top:80px; }
+  body{ background:var(--bg); color:var(--text); font-family:var(--sans); font-size:17px; line-height:1.6; -webkit-font-smoothing:antialiased; overflow-x:hidden; transition:background .3s, color .3s; }
   a{ color:inherit; text-decoration:none; }
   img{ display:block; max-width:100%; height:auto; }
-  ::selection{ background:var(--red); color:var(--ink); }
-  :focus-visible{ outline:3px solid var(--red); outline-offset:3px; }
-  .wrap{ width:min(1240px, 100% - 48px); margin-inline:auto; }
-
-  /* display type: the one big gesture of the page */
-  .disp{ font-stretch:125%; font-weight:900; text-transform:uppercase; line-height:.88; letter-spacing:-.01em; }
-  .dot{ display:inline-block; width:.22em; height:.22em; border-radius:50%; background:var(--red); margin-left:.06em; }
+  ::selection{ background:var(--accent); color:var(--on-accent); }
+  :focus-visible{ outline:2px solid var(--accent); outline-offset:3px; border-radius:6px; }
+  .wrap{ width:min(1160px, 100% - 48px); margin-inline:auto; }
 
   /* ---------- nav ---------- */
-  header{ position:sticky; top:0; z-index:50; background:var(--ink); color:var(--paper); }
+  header{ position:sticky; top:0; z-index:50; background:color-mix(in srgb, var(--bg) 82%, transparent); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border-bottom:1px solid var(--line); }
   .bar{ height:64px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
-  .brand{ display:flex; align-items:center; gap:12px; font-weight:800; font-stretch:112%; letter-spacing:.01em; }
-  .brand i{ width:22px; height:22px; border-radius:50%; background:var(--red); display:block; }
-  nav{ display:flex; align-items:center; gap:6px; }
-  nav a{ padding:8px 14px; font-weight:600; font-size:15px; opacity:.8; border-bottom:2px solid transparent; transition:opacity .15s, border-color .15s; }
-  nav a:hover, nav a.on{ opacity:1; border-color:var(--red); }
-  nav a.cv{ margin-left:8px; border:2px solid var(--paper); opacity:1; border-radius:999px; padding:6px 16px; }
-  nav a.cv:hover{ background:var(--paper); color:var(--ink); }
+  .brand{ font-weight:600; letter-spacing:-.01em; display:flex; align-items:center; gap:10px; }
+  .brand i{ width:8px; height:8px; border-radius:50%; background:var(--accent); display:block; }
+  nav{ display:flex; align-items:center; gap:4px; }
+  nav a.l{ padding:8px 12px; font-size:14.5px; color:var(--muted); border-radius:8px; transition:color .15s, background .15s; }
+  nav a.l:hover, nav a.l.on{ color:var(--text); background:var(--surface-2); }
+  .tbtn{ width:36px; height:36px; margin-left:6px; border:1px solid var(--line-2); border-radius:50%; background:transparent; color:var(--text); cursor:pointer; display:grid; place-items:center; transition:border-color .2s; }
+  .tbtn:hover{ border-color:var(--accent); }
+  .tbtn svg{ width:16px; height:16px; }
+  .moon{ display:none; }
+  :root:not([data-theme="light"]) .sun{ display:none; }
+  :root:not([data-theme="light"]) .moon{ display:block; }
+  nav a.cv{ margin-left:8px; padding:8px 16px; font-size:14.5px; font-weight:500; border-radius:999px; background:var(--text); color:var(--bg); transition:opacity .15s; }
+  nav a.cv:hover{ opacity:.85; }
 
-  /* sun rail: a red disc tracks your place down the page */
-  .rail{ position:fixed; right:14px; top:50%; height:34vh; transform:translateY(-50%); width:14px; z-index:40; pointer-events:none; }
-  .rail::before{ content:""; position:absolute; left:6px; top:0; bottom:0; width:2px; background:#fff; mix-blend-mode:difference; opacity:.55; }
-  .rail i{ position:absolute; left:0; top:calc(var(--p,0) * (100% - 14px)); width:14px; height:14px; border-radius:50%; background:var(--red); border:2px solid var(--paper); box-sizing:border-box; }
-
-  /* ---------- buttons ---------- */
-  .btn{ display:inline-flex; align-items:center; gap:10px; padding:14px 26px; border:3px solid var(--ink); border-radius:999px; font-weight:800; font-size:16px; background:transparent; color:inherit; cursor:pointer; transition:transform .15s, box-shadow .15s, background .15s, color .15s; font-family:var(--font); }
-  .btn:hover{ transform:translate(-2px,-2px); box-shadow:4px 4px 0 currentColor; }
-  .btn.red{ background:var(--red); color:var(--ink); border-color:var(--ink); }
-  .on-dark .btn{ border-color:var(--paper); }
-  .on-dark .btn.red{ border-color:var(--red); }
-  .btn svg{ width:18px; height:18px; }
+  /* ---------- type ---------- */
+  .serif{ font-family:var(--serif); font-weight:400; letter-spacing:-.02em; line-height:1; }
+  .label{ font-family:var(--mono); font-size:13px; color:var(--muted); }
+  .btn{ display:inline-flex; align-items:center; gap:8px; padding:13px 22px; border-radius:999px; font-weight:500; font-size:15.5px; border:1px solid var(--line-2); background:transparent; color:var(--text); cursor:pointer; transition:background .2s, border-color .2s, transform .2s; font-family:var(--sans); }
+  .btn:hover{ border-color:var(--text); transform:translateY(-1px); }
+  .btn.solid{ background:var(--text); color:var(--bg); border-color:var(--text); }
+  .btn.solid:hover{ opacity:.88; }
+  .btn svg{ width:15px; height:15px; }
+  .tags{ display:flex; flex-wrap:wrap; gap:6px; }
+  .tags span{ font-family:var(--mono); font-size:12px; color:var(--muted); padding:3px 10px; border:1px solid var(--line); border-radius:999px; background:var(--surface); }
+  .arrow{ display:inline-flex; align-items:center; gap:6px; font-weight:500; font-size:15px; color:var(--text); border-bottom:1px solid var(--line-2); padding-bottom:1px; transition:border-color .2s, color .2s; }
+  .arrow:hover{ border-color:var(--accent); color:var(--accent); }
 
   /* ---------- hero ---------- */
-  .hero{ background:var(--green); color:var(--paper); padding:56px 0 0; position:relative; overflow:hidden; }
-  .hero-top{ display:grid; grid-template-columns:1fr auto; gap:32px; align-items:center; }
-  .hero h1{ font-size:clamp(60px, 10.6vw, 156px); }
-  .hero h1 span{ display:block; overflow:hidden; }
-  .hero h1 span b{ display:block; font-weight:inherit; animation:rise .9s cubic-bezier(.2,.8,.2,1) both; }
-  .hero h1 span:nth-child(2) b{ animation-delay:.12s; }
-  @keyframes rise{ from{ transform:translateY(105%); } }
-  .bn{ font-family:var(--bn); font-weight:700; font-size:clamp(24px,3vw,38px); margin-top:20px; color:var(--paper); opacity:.92; }
-  .sun{ position:relative; width:clamp(240px, 30vw, 420px); aspect-ratio:1; flex:none; }
-  .sun::before{ content:""; position:absolute; inset:0; border-radius:50%; background:var(--red); }
-  .sun .pic{ position:absolute; left:-4%; bottom:-3%; width:84%; aspect-ratio:1; border-radius:50%; border:6px solid var(--green); overflow:hidden; background:var(--paper); }
-  .sun .pic img{ width:100%; height:100%; object-fit:cover; object-position:50% 35%; transform:scale(1.38); }
-  .sun em{ position:absolute; right:4%; top:-3%; font-style:normal; font-weight:800; font-size:14px; background:var(--paper); color:var(--ink); padding:7px 14px; border-radius:999px; transform:rotate(7deg); border:2px solid var(--ink); }
-  .hero-mid{ margin-top:40px; display:flex; flex-wrap:wrap; justify-content:space-between; gap:28px; align-items:flex-end; }
-  .hero-mid p{ font-size:clamp(20px, 2.3vw, 28px); font-weight:600; line-height:1.25; max-width:24em; }
-  .hero-cta{ display:flex; flex-wrap:wrap; gap:12px; }
-  .hero .btn{ border-color:var(--paper); }
-  .hero .btn.red{ border-color:var(--red); }
-  .strip{ margin-top:48px; display:grid; grid-template-columns:repeat(4,1fr); border-top:3px solid var(--paper); }
-  .strip div{ padding:20px 20px 24px 0; border-right:2px solid color-mix(in srgb, var(--paper) 35%, transparent); }
-  .strip div + div{ padding-left:22px; }
-  .strip div:last-child{ border-right:none; }
-  .strip b{ display:block; font-stretch:125%; font-weight:900; font-size:clamp(30px,4vw,54px); line-height:1; }
-  .strip span{ display:block; margin-top:8px; font-size:15px; opacity:.85; }
+  .hero{ padding:96px 0 72px; }
+  .who{ display:flex; align-items:center; gap:14px; margin-bottom:40px; }
+  .who img{ width:52px; height:52px; border-radius:50%; object-fit:cover; border:1px solid var(--line-2); }
+  .who b{ display:block; font-weight:600; line-height:1.2; }
+  .who span{ font-size:14.5px; color:var(--muted); display:flex; align-items:center; gap:8px; }
+  .who span i{ width:7px; height:7px; border-radius:50%; background:#3DD68C; display:block; }
+  h1{ font-size:clamp(50px, 8.6vw, 128px); max-width:11.5em; }
+  h1 em{ font-style:italic; color:var(--muted); }
+  .sub{ margin-top:32px; max-width:34em; font-size:clamp(18px,1.7vw,21px); color:var(--muted); line-height:1.5; }
+  .cta{ margin-top:36px; display:flex; flex-wrap:wrap; gap:12px; }
+  .meta{ margin-top:72px; display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid var(--line); }
+  .meta div{ padding:22px 24px 0 0; }
+  .meta b{ display:block; font-family:var(--serif); font-weight:400; font-size:clamp(34px,4vw,52px); letter-spacing:-.02em; line-height:1; }
+  .meta span{ display:block; margin-top:8px; font-size:14.5px; color:var(--muted); }
 
   /* ---------- sections ---------- */
-  section{ padding:104px 0; }
-  .head{ display:flex; align-items:flex-end; justify-content:space-between; gap:16px 24px; flex-wrap:wrap; margin-bottom:56px; }
-  h2{ font-size:clamp(40px, 7.3vw, 112px); white-space:nowrap; }
-  .head p{ max-width:26em; font-weight:600; font-size:19px; line-height:1.35; }
+  section{ padding:112px 0 0; }
+  .head{ display:flex; align-items:flex-end; justify-content:space-between; gap:16px 32px; flex-wrap:wrap; margin-bottom:48px; }
+  h2{ font-size:clamp(38px,5.4vw,72px); }
+  .head p{ color:var(--muted); max-width:28em; }
 
-  .frame{ background:#fff; border:3px solid var(--ink); box-shadow:10px 10px 0 var(--ink); transition:transform .2s, box-shadow .2s; }
-  .frame:hover{ transform:translate(-3px,-3px); box-shadow:14px 14px 0 var(--ink); }
-  .frame img{ width:100%; }
-  .tags{ display:flex; flex-wrap:wrap; gap:8px; }
-  .tags span{ font-size:14px; font-weight:700; padding:3px 12px; border:2px solid currentColor; border-radius:999px; }
-  .links{ display:flex; flex-wrap:wrap; gap:10px; }
-  .link{ font-weight:800; font-size:16px; border-bottom:3px solid var(--red); padding-bottom:1px; transition:background .15s; }
-  .link:hover{ background:var(--red); }
+  .shot{ background:var(--surface); border:1px solid var(--line-2); border-radius:14px; overflow:hidden; box-shadow:var(--shadow); }
+  .shot .chrome{ display:flex; gap:6px; padding:10px 14px; border-bottom:1px solid var(--line); background:var(--surface-2); }
+  .shot .chrome i{ width:9px; height:9px; border-radius:50%; background:var(--line-2); }
+  .shot img{ width:100%; }
 
-  /* shipped */
-  #shipped{ background:var(--paper); }
-  .ship{ display:grid; grid-template-columns:.8fr 1.2fr; gap:64px; align-items:start; }
-  .ship h3{ font-size:clamp(44px,5.6vw,84px); }
-  .ship .lede{ margin-top:18px; font-size:24px; font-weight:700; line-height:1.2; max-width:15em; }
-  .facts{ margin-top:30px; display:grid; grid-template-columns:1fr 1fr; border-top:3px solid var(--ink); }
-  .facts div{ padding:16px 0; border-bottom:2px solid var(--ink); }
-  .facts div:nth-child(odd){ padding-right:16px; border-right:2px solid var(--ink); }
-  .facts div:nth-child(even){ padding-left:20px; }
-  .facts b{ display:block; font-stretch:125%; font-weight:900; font-size:34px; line-height:1; }
-  .facts span{ font-size:15px; font-weight:600; }
-  .ship .tags{ margin-top:26px; }
-  .ship .btns{ margin-top:30px; display:flex; flex-wrap:wrap; gap:12px; }
-  .note{ margin-top:14px; font-size:14px; font-weight:500; opacity:.75; }
-  .ship-shots{ display:grid; gap:34px; }
-  .ship-shots .frame:nth-child(2){ width:78%; margin-left:auto; }
+  /* featured */
+  .feat{ display:grid; grid-template-columns:.78fr 1.22fr; gap:64px; align-items:center; border:1px solid var(--line); border-radius:24px; padding:48px; background:var(--surface); }
+  .feat .label{ display:flex; align-items:center; gap:8px; }
+  .feat .label i{ width:7px; height:7px; border-radius:50%; background:#3DD68C; }
+  .feat h3{ margin-top:16px; font-size:clamp(48px,5.6vw,80px); }
+  .feat .lede{ margin-top:16px; color:var(--muted); font-size:19px; line-height:1.45; max-width:22em; }
+  .nums{ margin-top:30px; display:grid; grid-template-columns:repeat(3,auto); justify-content:start; gap:0 36px; }
+  .nums b{ display:block; font-family:var(--serif); font-weight:400; font-size:38px; line-height:1; letter-spacing:-.02em; }
+  .nums span{ font-size:13.5px; color:var(--muted); }
+  .feat .tags{ margin-top:28px; }
+  .feat .cta{ margin-top:30px; }
+  .feat .note{ margin-top:14px; font-size:13.5px; color:var(--faint); }
+  .feat-shots{ position:relative; padding-bottom:56px; }
+  .feat-shots .shot + .shot{ position:absolute; width:58%; right:-14px; bottom:0; }
 
-  /* seen running */
-  #seen{ background:var(--paper-2); }
-  .grid2{ display:grid; grid-template-columns:repeat(2,1fr); gap:72px 56px; }
-  .case h3{ font-size:clamp(28px,3vw,40px); margin-top:30px; }
-  .case p.one{ margin-top:10px; font-weight:600; font-size:19px; line-height:1.3; }
-  .case .proves{ margin-top:10px; font-size:16px; }
-  .case .proves b{ background:var(--red); padding:0 8px; margin-right:6px; font-weight:800; }
-  .case .tags{ margin-top:16px; }
-  .case .links{ margin-top:20px; }
-  .pair{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
-  .pair .frame{ box-shadow:7px 7px 0 var(--ink); }
-  .trio{ display:grid; grid-template-columns:1.25fr 1fr 1fr; gap:14px; align-items:end; }
-  .trio .frame{ box-shadow:6px 6px 0 var(--ink); }
+  /* work cards */
+  .work{ display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:20px; }
+  .card{ grid-column:span 3; display:flex; flex-direction:column; background:var(--surface); border:1px solid var(--line); border-radius:20px; overflow:hidden; transition:border-color .25s, transform .25s; }
+  .card:hover{ border-color:var(--line-2); transform:translateY(-4px); }
+  .card.wide{ grid-column:span 6; flex-direction:row; }
+  .media{ background:var(--surface-2); border-bottom:1px solid var(--line); padding:22px; display:grid; gap:14px; align-items:center; min-height:250px; }
+  .media.two{ grid-template-columns:1fr 1fr; } .media.three{ grid-template-columns:1.2fr 1fr 1fr; }
+  .media img{ width:100%; border-radius:8px; border:1px solid var(--line-2); background:#fff; }
+  .media.one{ padding:0; display:block; }
+  .media.one img{ border:none; border-radius:0; aspect-ratio:16/9; object-fit:cover; }
+  .card.wide .media{ width:46%; border-bottom:none; border-right:1px solid var(--line); padding:0; display:block; }
+  .card.wide .media img{ border:none; border-radius:0; height:100%; object-fit:cover; object-position:top; aspect-ratio:auto; }
+  .card .body{ padding:26px 28px 28px; display:flex; flex-direction:column; flex:1; }
+  .card h3{ font-size:34px; }
+  .card .one{ margin-top:10px; color:var(--text); font-size:17px; line-height:1.45; }
+  .card .shows{ margin-top:8px; color:var(--muted); font-size:15px; }
+  .card .tags{ margin-top:18px; }
+  .card .row{ margin-top:auto; padding-top:22px; display:flex; gap:20px; flex-wrap:wrap; }
   .play{ position:relative; display:block; }
-  .play::after{ content:""; position:absolute; left:50%; top:50%; width:84px; height:84px; margin:-42px 0 0 -42px; border-radius:50%; background:var(--red); border:3px solid var(--ink); }
-  .play::before{ content:""; position:absolute; z-index:1; left:50%; top:50%; margin:-14px 0 0 -9px; border-left:26px solid var(--ink); border-top:15px solid transparent; border-bottom:15px solid transparent; }
-  .full{ grid-column:1 / -1; }
-  .full .split{ display:grid; grid-template-columns:1.3fr 1fr; gap:56px; align-items:center; }
-  .full .split h3{ margin-top:0; }
+  .play::after{ content:""; position:absolute; left:50%; top:50%; width:64px; height:64px; margin:-32px 0 0 -32px; border-radius:50%; background:rgba(10,10,11,.7); border:1px solid rgba(255,255,255,.4); backdrop-filter:blur(6px); }
+  .play::before{ content:""; position:absolute; z-index:1; left:50%; top:50%; margin:-10px 0 0 -6px; border-left:18px solid #fff; border-top:10px solid transparent; border-bottom:10px solid transparent; }
 
-  /* code first */
-  #code{ background:var(--ink); color:var(--paper); }
-  #code .head p{ color:var(--paper); }
-  .cards{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px; }
-  .card{ border:2px solid color-mix(in srgb, var(--paper) 40%, transparent); padding:26px; display:flex; flex-direction:column; transition:border-color .2s, transform .2s, background .2s; background:var(--ink-2); }
-  .card:hover{ border-color:var(--red); transform:translateY(-4px); }
-  .card h3{ font-size:26px; font-weight:800; font-stretch:112%; letter-spacing:-.01em; line-height:1.1; }
-  .card .kind{ margin-top:6px; font-size:15px; font-weight:600; opacity:.75; }
-  pre{ margin:20px 0; padding:16px 18px; background:var(--ink); border-left:4px solid var(--red); font-family:var(--mono); font-size:13.5px; line-height:1.7; overflow-x:auto; color:var(--paper); }
-  pre .m{ color:#FF8C9B; } pre .d{ color:#8FA39A; } pre .g{ color:#5FE0B0; }
-  .card .tags{ margin-top:auto; }
-  .card .tags span{ font-size:13px; border-color:color-mix(in srgb, var(--paper) 45%, transparent); }
-  .card .links{ margin-top:18px; }
-  .card.more{ background:var(--red); color:var(--ink); border-color:var(--red); justify-content:space-between; }
-  .card.more .links a{ border-color:var(--ink); }
-  .card.more .links a:hover{ background:var(--ink); color:var(--paper); }
-  .card.more h3{ font-size:34px; }
+  /* code first list */
+  .list{ border-top:1px solid var(--line); }
+  .item{ display:grid; grid-template-columns:1fr 1.3fr 1fr auto; gap:28px; align-items:center; padding:28px 8px; border-bottom:1px solid var(--line); transition:background .2s; }
+  .item:hover{ background:var(--surface); }
+  .item h3{ font-size:26px; }
+  .item .kind{ font-size:14.5px; color:var(--muted); margin-top:4px; }
+  .item code{ font-family:var(--mono); font-size:13px; color:var(--muted); line-height:1.8; display:block; }
+  .item code b{ font-weight:500; color:var(--accent); }
+  .item .tags{ justify-content:flex-start; }
 
   /* log */
-  #log{ background:var(--paper); }
-  .logs{ display:grid; grid-template-columns:repeat(3,1fr); gap:34px; }
-  .logs figcaption{ margin-top:22px; font-weight:800; font-size:19px; line-height:1.2; }
-  .logs figcaption small{ display:block; margin-top:4px; font-size:15px; font-weight:500; opacity:.75; }
-  .topics{ margin-top:56px; display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
-  .topics .tags span{ font-size:16px; padding:5px 16px; }
+  .logs{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+  .logs figure .shot{ box-shadow:none; }
+  .logs figcaption{ margin-top:14px; font-weight:500; }
+  .logs figcaption span{ display:block; font-size:14px; color:var(--muted); font-weight:400; }
+  .topics{ margin-top:36px; display:flex; flex-wrap:wrap; gap:14px 24px; align-items:center; justify-content:space-between; }
 
-  /* about + stack */
-  #about{ background:var(--green); color:var(--paper); }
-  .abt{ display:grid; grid-template-columns:1fr 1.15fr; gap:72px; }
-  .abt .big{ margin-top:6px; font-size:clamp(24px,2.6vw,34px); font-weight:700; line-height:1.2; }
-  .abt .small{ margin-top:22px; max-width:30em; font-weight:500; opacity:.9; }
-  .abt .me{ margin-top:30px; width:min(240px, 60%); }
-  .abt .me img{ border-radius:50%; border:6px solid var(--red); aspect-ratio:1; object-fit:cover; width:100%; }
-  .stack{ border-top:3px solid var(--paper); }
-  .stack div{ display:grid; grid-template-columns:150px 1fr; gap:20px; padding:18px 0; border-bottom:2px solid color-mix(in srgb, var(--paper) 40%, transparent); }
-  .stack dt{ font-weight:800; font-stretch:112%; font-size:16px; padding-top:3px; }
-  .stack dd{ font-size:20px; font-weight:600; line-height:1.35; }
-  .stack dd b{ background:var(--paper); color:var(--ink); padding:0 8px; font-weight:800; }
+  /* about / stack */
+  .about{ display:grid; grid-template-columns:1fr 1.1fr; gap:72px; }
+  .about .big{ font-family:var(--serif); font-size:clamp(28px,3.2vw,42px); line-height:1.15; letter-spacing:-.015em; }
+  .about .small{ margin-top:22px; color:var(--muted); max-width:30em; }
+  .about .bn{ margin-top:26px; font-family:var(--bn); font-size:22px; color:var(--faint); }
+  .stack{ border-top:1px solid var(--line); }
+  .stack div{ display:grid; grid-template-columns:130px 1fr; gap:20px; padding:18px 0; border-bottom:1px solid var(--line); }
+  .stack dt{ font-family:var(--mono); font-size:13px; color:var(--muted); padding-top:3px; }
+  .stack dd{ font-size:17px; line-height:1.5; }
+  .stack dd span{ color:var(--muted); }
 
   /* contact */
-  #contact{ background:var(--red); color:var(--ink); padding-bottom:88px; }
-  #contact h2{ font-size:clamp(56px, 13vw, 200px); }
-  .mail{ display:inline-block; margin-top:36px; font-size:clamp(22px,4.6vw,64px); font-weight:800; font-stretch:112%; letter-spacing:-.02em; border-bottom:6px solid var(--ink); line-height:1.1; word-break:break-all; transition:background .15s, color .15s; }
-  .mail:hover{ background:var(--ink); color:var(--red); }
-  #contact .links{ margin-top:36px; gap:12px; }
-  #contact .btn:hover{ background:var(--ink); color:var(--red); box-shadow:none; }
+  #contact{ padding-bottom:104px; }
+  .cta-box{ border:1px solid var(--line); border-radius:28px; padding:72px 56px; background:var(--surface); text-align:left; }
+  .cta-box h2{ font-size:clamp(44px,7vw,104px); max-width:11em; }
+  .cta-box h2 em{ font-style:italic; color:var(--muted); }
+  .mail{ display:inline-block; margin-top:34px; font-size:clamp(20px,3vw,34px); font-weight:500; letter-spacing:-.02em; border-bottom:1px solid var(--line-2); padding-bottom:4px; transition:border-color .2s, color .2s; word-break:break-all; }
+  .mail:hover{ border-color:var(--accent); color:var(--accent); }
+  .cta-box .cta{ margin-top:32px; }
 
-  footer{ background:var(--ink); color:var(--paper); padding:28px 0 32px; font-size:15px; }
+  footer{ border-top:1px solid var(--line); padding:28px 0 36px; color:var(--muted); font-size:14.5px; }
   footer .wrap{ display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; }
-  footer span:last-child{ opacity:.8; }
 
   /* reveal */
-  .js .rv{ opacity:0; transform:translateY(26px); transition:opacity .7s ease, transform .7s cubic-bezier(.2,.8,.2,1); }
+  .js .rv{ opacity:0; transform:translateY(20px); transition:opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
   .js .rv.in{ opacity:1; transform:none; }
 
   /* ---------- responsive ---------- */
-  @media (max-width: 1040px){
-    .hero-top{ grid-template-columns:1fr; }
-    .sun{ width:min(300px, 70vw); margin-top:8px; }
-    .strip{ grid-template-columns:1fr 1fr; }
-    .strip div:nth-child(2){ border-right:none; } .strip div:nth-child(3){ padding-left:0; } .strip div:nth-child(-n+2){ border-bottom:2px solid color-mix(in srgb, var(--paper) 35%, transparent); }
-    .ship, .abt, .full .split{ grid-template-columns:1fr; gap:48px; }
-    .grid2{ grid-template-columns:1fr; }
-    .cards{ grid-template-columns:repeat(2,minmax(0,1fr)); }
-    .logs{ grid-template-columns:1fr 1fr; }
-    section{ padding:80px 0; }
-    .rail{ display:none; }
+  @media (max-width: 1000px){
+    .hero{ padding:64px 0 56px; }
+    .meta{ grid-template-columns:1fr 1fr; } .meta div:nth-child(n+3){ margin-top:8px; }
+    .feat{ grid-template-columns:1fr; padding:32px; gap:48px; }
+    .card{ grid-column:span 6; } .card.wide{ flex-direction:column; } .card.wide .media{ width:100%; border-right:none; border-bottom:1px solid var(--line); aspect-ratio:16/9; }
+    .item{ grid-template-columns:1fr 1fr; gap:14px 28px; }
+    .about{ grid-template-columns:1fr; gap:48px; }
+    section{ padding-top:88px; }
   }
   @media (max-width: 640px){
-    body{ font-size:17px; }
-    h2{ white-space:normal; }
-    .wrap{ width:min(1240px, 100% - 36px); }
-    nav a:not(.cv){ display:none; }
-    .cards, .logs, .pair, .trio{ grid-template-columns:minmax(0,1fr); }
-    .trio .frame, .pair .frame{ box-shadow:6px 6px 0 var(--ink); }
-    .frame{ box-shadow:7px 7px 0 var(--ink); }
-    .ship-shots .frame:nth-child(2){ width:100%; }
-    .stack div{ grid-template-columns:1fr; gap:4px; }
-    .facts b{ font-size:28px; }
-    .hero-mid{ flex-direction:column; align-items:flex-start; }
+    body{ font-size:16.5px; }
+    .wrap{ width:min(1160px, 100% - 36px); }
+    nav a.l{ display:none; }
+    .nums{ grid-template-columns:repeat(3,auto); gap:0 22px; } .nums b{ font-size:30px; }
+    .feat{ padding:22px; border-radius:20px; } .feat-shots{ padding-bottom:0; } .feat-shots .shot + .shot{ display:none; }
+    .media.three{ grid-template-columns:1fr 1fr; } .media.three img:first-child{ grid-column:1 / -1; }
+    .item{ grid-template-columns:1fr; }
+    .logs{ grid-template-columns:1fr; }
+    .stack div{ grid-template-columns:1fr; gap:2px; }
+    .cta-box{ padding:40px 24px; border-radius:22px; }
+    .card .body{ padding:22px; }
   }
   @media (prefers-reduced-motion: reduce){
     html{ scroll-behavior:auto; }
-    *, *::before, *::after{ animation:none !important; transition:none !important; }
+    *{ transition:none !important; }
     .js .rv{ opacity:1; transform:none; }
   }
 </style>
-<script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
 
@@ -231,141 +222,132 @@
   <div class="wrap bar">
     <a class="brand" href="#top" aria-label="Nazmul Hasan, back to top"><i></i>Nazmul Hasan</a>
     <nav aria-label="Primary">
-      <a href="#shipped">Live</a>
-      <a href="#seen">Work</a>
-      <a href="#code">Code</a>
-      <a href="#log">Log</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
-      <a class="cv" href="Nazmul_Hasan_Resume.pdf" download>Résumé</a>
+      <a class="l" href="#featured">Featured</a>
+      <a class="l" href="#work">Work</a>
+      <a class="l" href="#code">Code</a>
+      <a class="l" href="#log">Log</a>
+      <a class="l" href="#about">About</a>
+      <button class="tbtn" id="themeToggle" type="button" aria-label="Switch between dark and light theme">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg>
+      </button>
+      <a class="cv" href="#contact">Get in touch</a>
     </nav>
   </div>
 </header>
-<div class="rail" aria-hidden="true"><i id="sun"></i></div>
 
 <main id="top">
 
   <!-- HERO -->
-  <div class="hero on-dark">
+  <div class="hero">
     <div class="wrap">
-      <div class="hero-top">
-        <div>
-          <h1 class="disp"><span><b>Nazmul</b></span><span><b>Hasan<i class="dot"></i></b></span></h1>
-          <p class="bn" lang="bn">নাজমুল হাসান</p>
-        </div>
-        <div class="sun">
-          <span class="pic"><img src="assets/avatar.jpg" alt="Portrait of Nazmul Hasan" width="600" height="600"></span>
-          <em>Open to work</em>
-        </div>
+      <div class="who">
+        <img src="assets/avatar.jpg" alt="Portrait of Nazmul Hasan" width="52" height="52">
+        <div><b>Nazmul Hasan</b><span><i></i>Open to internships and junior roles</span></div>
       </div>
-      <div class="hero-mid">
-        <p>Software engineer building backends, applied AI and the systems underneath.</p>
-        <div class="hero-cta">
-          <a class="btn red" href="https://jachai.nazmulhsn.me" target="_blank" rel="noopener">Open JachAI live
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
-          <a class="btn" href="#seen">See the work</a>
-        </div>
+      <h1 class="serif">Software engineer building backends that <em>hold up.</em></h1>
+      <p class="sub">I design services in Java, Spring Boot and Go, add applied AI where it helps, and ship them live. Based in Dhaka.</p>
+      <div class="cta">
+        <a class="btn solid" href="https://jachai.nazmulhsn.me" target="_blank" rel="noopener">Open JachAI live
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+        <a class="btn" href="Nazmul_Hasan_Resume.pdf" download>Download résumé</a>
       </div>
-      <div class="strip">
+      <div class="meta">
         <div><b id="repoCount">18</b><span>public repositories</span></div>
         <div><b>733</b><span>Java tests in JachAI</span></div>
         <div><b>98.5%</b><span>MRI model accuracy</span></div>
-        <div><b>6</b><span>domains, APIs to graphics</span></div>
+        <div><b>6</b><span>domains, from APIs to graphics</span></div>
       </div>
     </div>
   </div>
 
-  <!-- LIVE -->
-  <section id="shipped">
+  <!-- FEATURED -->
+  <section id="featured">
     <div class="wrap">
-      <div class="head rv"><h2 class="disp">Live<i class="dot"></i></h2><p>One project is deployed. Open it and click around.</p></div>
-      <div class="ship rv">
+      <div class="head rv"><h2 class="serif">Featured</h2><p>The one project that is deployed. Open it and click around.</p></div>
+      <div class="feat rv">
         <div>
-          <h3 class="disp">JachAI</h3>
+          <span class="label"><i></i>Live</span>
+          <h3 class="serif">JachAI</h3>
           <p class="lede">Tests and certificates where the server keeps the clock.</p>
-          <div class="facts">
-            <div><b>6</b><span>one-click demo roles</span></div>
+          <div class="nums">
+            <div><b>6</b><span>demo roles</span></div>
             <div><b>733</b><span>Java tests</span></div>
             <div><b>176</b><span>browser checks</span></div>
-            <div><b>2</b><span>languages: EN, বাংলা</span></div>
           </div>
           <div class="tags"><span>Java 21</span><span>Spring Boot</span><span>MongoDB</span><span>Redis</span><span>Docker</span></div>
-          <div class="btns">
-            <a class="btn red" href="https://jachai.nazmulhsn.me" target="_blank" rel="noopener">Open live demo</a>
+          <div class="cta">
+            <a class="btn solid" href="https://jachai.nazmulhsn.me" target="_blank" rel="noopener">Open live demo</a>
             <a class="btn" href="https://github.com/Nazmul142965/jachAI" target="_blank" rel="noopener">Source</a>
           </div>
           <p class="note">Free server: the first load can take about 30 seconds.</p>
         </div>
-        <div class="ship-shots">
-          <a class="frame" href="https://jachai.nazmulhsn.me" target="_blank" rel="noopener"><img src="assets/work/jachai-home.webp" alt="JachAI sign-in page with six one-click demo roles" width="1280" height="800"></a>
-          <a class="frame" href="https://jachai.nazmulhsn.me" target="_blank" rel="noopener"><img src="assets/work/jachai-dashboard.webp" alt="JachAI workspace dashboard" width="1600" height="741" loading="lazy"></a>
+        <div class="feat-shots">
+          <div class="shot"><div class="chrome"><i></i><i></i><i></i></div><img src="assets/work/jachai-home.webp" alt="JachAI sign-in page with six one-click demo roles" width="1280" height="800"></div>
+          <div class="shot"><div class="chrome"><i></i><i></i><i></i></div><img src="assets/work/jachai-dashboard.webp" alt="JachAI workspace dashboard" width="1600" height="741" loading="lazy"></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SEEN RUNNING -->
-  <section id="seen">
+  <!-- WORK -->
+  <section id="work">
     <div class="wrap">
-      <div class="head rv"><h2 class="disp">Seen running<i class="dot"></i></h2><p>Not deployed, but here is what they look like.</p></div>
-      <div class="grid2">
+      <div class="head rv"><h2 class="serif">Selected work</h2><p>Not deployed, but here is what they look like running.</p></div>
+      <div class="work">
 
-        <article class="case rv">
-          <div class="pair">
-            <div class="frame"><img src="assets/work/campus-login.webp" alt="CampusCollab sign-in with Student, Faculty and Admin roles" width="1400" height="875" loading="lazy"></div>
-            <div class="frame"><img src="assets/work/campus-dash.webp" alt="CampusCollab student dashboard with six modules in the sidebar" width="1400" height="875" loading="lazy"></div>
+        <article class="card rv">
+          <div class="media two"><img src="assets/work/campus-login.webp" alt="CampusCollab sign-in with Student, Faculty and Admin roles" width="1400" height="875" loading="lazy"><img src="assets/work/campus-dash.webp" alt="CampusCollab student dashboard with six modules" width="1400" height="875" loading="lazy"></div>
+          <div class="body">
+            <h3 class="serif">CampusCollab</h3>
+            <p class="one">One portal for students, faculty and admins, with six modules.</p>
+            <p class="shows">Shows role-based flows, end to end.</p>
+            <div class="tags"><span>Spring Boot API</span><span>Tailwind UI</span></div>
+            <div class="row"><a class="arrow" href="https://github.com/Nazmul142965/CampusCollab" target="_blank" rel="noopener">Code</a><a class="arrow" href="https://github.com/Nazmul142965/CampusCollab/blob/main/CampusCollab-Project-Report.pdf" target="_blank" rel="noopener">Project report</a></div>
           </div>
-          <h3 class="disp">CampusCollab</h3>
-          <p class="one">One portal for students, faculty and admins, with six modules.</p>
-          <p class="proves"><b>Proves</b>Role-based flows end to end.</p>
-          <div class="tags"><span>Spring Boot API</span><span>Tailwind UI</span></div>
-          <div class="links"><a class="link" href="https://github.com/Nazmul142965/CampusCollab" target="_blank" rel="noopener">Code</a><a class="link" href="https://github.com/Nazmul142965/CampusCollab/blob/main/CampusCollab-Project-Report.pdf" target="_blank" rel="noopener">Project report</a></div>
         </article>
 
-        <article class="case rv">
-          <div class="trio">
-            <div class="frame"><img src="assets/work/daily-dashboard.webp" alt="Daily Driver dashboard" width="757" height="537" loading="lazy"></div>
-            <div class="frame"><img src="assets/work/daily-todo.webp" alt="Daily Driver to-do view" width="752" height="666" loading="lazy"></div>
-            <div class="frame"><img src="assets/work/daily-routine.webp" alt="Daily Driver routine view" width="866" height="723" loading="lazy"></div>
+        <article class="card rv">
+          <div class="media three"><img src="assets/work/daily-dashboard.webp" alt="Daily Driver dashboard" width="757" height="537" loading="lazy"><img src="assets/work/daily-todo.webp" alt="Daily Driver to-do view" width="752" height="666" loading="lazy"><img src="assets/work/daily-routine.webp" alt="Daily Driver routine view" width="866" height="723" loading="lazy"></div>
+          <div class="body">
+            <h3 class="serif">Daily Driver</h3>
+            <p class="one">A desktop planner with a dashboard, to-dos and routines.</p>
+            <p class="shows">Shows a full desktop UI, not just logic.</p>
+            <div class="tags"><span>JavaFX</span><span>Maven</span></div>
+            <div class="row"><a class="arrow" href="https://github.com/Nazmul142965/Daily_Driver" target="_blank" rel="noopener">Code</a></div>
           </div>
-          <h3 class="disp">Daily Driver</h3>
-          <p class="one">A desktop planner: dashboard, to-dos and routines.</p>
-          <p class="proves"><b>Proves</b>A full desktop UI, not just logic.</p>
-          <div class="tags"><span>JavaFX</span><span>Maven</span></div>
-          <div class="links"><a class="link" href="https://github.com/Nazmul142965/Daily_Driver" target="_blank" rel="noopener">Code</a></div>
         </article>
 
-        <article class="case rv">
-          <div class="pair">
-            <div class="frame"><img src="assets/work/brain-confusion.webp" alt="Confusion matrix for the four tumour classes" width="1400" height="1050" loading="lazy"></div>
-            <div class="frame"><img src="assets/work/brain-results.webp" alt="Training and validation curves" width="1200" height="1200" loading="lazy"></div>
+        <article class="card rv">
+          <div class="media two"><img src="assets/work/brain-confusion.webp" alt="Confusion matrix for the four tumour classes" width="1400" height="1050" loading="lazy"><img src="assets/work/brain-results.webp" alt="Training and validation curves" width="1200" height="1200" loading="lazy"></div>
+          <div class="body">
+            <h3 class="serif">Brain MRI model</h3>
+            <p class="one">YOLOv8-Nano sorts scans into four classes at 98.5% validation accuracy.</p>
+            <p class="shows">Shows training, testing and explaining a model.</p>
+            <div class="tags"><span>Python</span><span>YOLOv8</span><span>1.4M params</span></div>
+            <div class="row"><a class="arrow" href="https://github.com/Nazmul142965/Brain-Tumor-MRI-Classification-YOLOv8" target="_blank" rel="noopener">Code</a></div>
           </div>
-          <h3 class="disp">Brain MRI model</h3>
-          <p class="one">YOLOv8-Nano sorts scans into four classes at 98.5% validation accuracy.</p>
-          <p class="proves"><b>Proves</b>Training, testing and explaining a model.</p>
-          <div class="tags"><span>Python</span><span>YOLOv8</span><span>1.4M parameters</span></div>
-          <div class="links"><a class="link" href="https://github.com/Nazmul142965/Brain-Tumor-MRI-Classification-YOLOv8" target="_blank" rel="noopener">Code</a></div>
         </article>
 
-        <article class="case rv">
-          <a class="frame play" href="https://youtu.be/FqJ5yLYbOSE" target="_blank" rel="noopener" aria-label="Watch the Night Harbor 3D demo video"><img src="assets/work/harbor.webp" alt="Night Harbor 3D video thumbnail" width="1280" height="720" loading="lazy"></a>
-          <h3 class="disp">Night Harbor 3D</h3>
-          <p class="one">A lighthouse, ships and a day-night cycle in raw OpenGL.</p>
-          <p class="proves"><b>Proves</b>Graphics maths without a game engine.</p>
-          <div class="tags"><span>C++</span><span>OpenGL</span><span>GLUT</span></div>
-          <div class="links"><a class="link" href="https://youtu.be/FqJ5yLYbOSE" target="_blank" rel="noopener">Watch demo</a><a class="link" href="https://github.com/Nazmul142965/project_harbor" target="_blank" rel="noopener">Code</a></div>
+        <article class="card rv">
+          <a class="media one play" href="https://youtu.be/FqJ5yLYbOSE" target="_blank" rel="noopener" aria-label="Watch the Night Harbor 3D demo video"><img src="assets/work/harbor.webp" alt="Night Harbor 3D video thumbnail" width="1280" height="720" loading="lazy"></a>
+          <div class="body">
+            <h3 class="serif">Night Harbor 3D</h3>
+            <p class="one">A lighthouse, ships and a day-night cycle in raw OpenGL.</p>
+            <p class="shows">Shows graphics maths without a game engine.</p>
+            <div class="tags"><span>C++</span><span>OpenGL</span><span>GLUT</span></div>
+            <div class="row"><a class="arrow" href="https://youtu.be/FqJ5yLYbOSE" target="_blank" rel="noopener">Watch demo</a><a class="arrow" href="https://github.com/Nazmul142965/project_harbor" target="_blank" rel="noopener">Code</a></div>
+          </div>
         </article>
 
-        <article class="case full rv">
-          <div class="split">
-            <div class="frame"><img src="assets/work/poster.webp" alt="Poster explaining the scaled dot-product attention algorithm" width="1600" height="1132" loading="lazy"></div>
-            <div>
-              <h3 class="disp">Attention, on one page</h3>
-              <p class="one">A poster explaining scaled dot-product attention, made at Southeast University.</p>
-              <p class="proves"><b>Proves</b>Explaining a hard idea clearly.</p>
-              <div class="tags"><span>LaTeX</span><span>Transformers</span></div>
-              <div class="links"><a class="link" href="https://github.com/Nazmul142965/Attention-In-Poster" target="_blank" rel="noopener">Poster and source</a></div>
-            </div>
+        <article class="card wide rv">
+          <div class="media one"><img src="assets/work/poster.webp" alt="Poster explaining the scaled dot-product attention algorithm" width="1600" height="1132" loading="lazy"></div>
+          <div class="body" style="justify-content:center;">
+            <h3 class="serif">Attention, on one page</h3>
+            <p class="one">A poster explaining scaled dot-product attention, made at Southeast University.</p>
+            <p class="shows">Shows explaining a hard idea clearly.</p>
+            <div class="tags"><span>LaTeX</span><span>Transformers</span></div>
+            <div class="row" style="margin-top:0;padding-top:22px;"><a class="arrow" href="https://github.com/Nazmul142965/Attention-In-Poster" target="_blank" rel="noopener">Poster and source</a></div>
           </div>
         </article>
 
@@ -374,122 +356,104 @@
   </section>
 
   <!-- CODE FIRST -->
-  <section id="code" class="on-dark">
+  <section id="code">
     <div class="wrap">
-      <div class="head rv"><h2 class="disp">Code first<i class="dot"></i></h2><p>No screenshots for these, so here is the shape of each one.</p></div>
-      <div class="cards">
+      <div class="head rv"><h2 class="serif">Code first</h2><p>No screenshots for these, so here is the shape of each one.</p></div>
+      <div class="list">
 
-        <article class="card rv">
-          <h3>Students API</h3><p class="kind">REST in Go, no framework</p>
-<pre><span class="m">POST</span> /api/students
-<span class="m">GET </span> /api/students
-<span class="m">GET </span> /api/students/{id}</pre>
-          <div class="tags"><span>Go</span><span>net/http</span><span>SQLite</span></div>
-          <div class="links"><a class="link" href="https://github.com/Nazmul142965/students-api-usingGO" target="_blank" rel="noopener">Code</a></div>
+        <article class="item rv">
+          <div><h3 class="serif">Students API</h3><p class="kind">REST in Go, no framework</p></div>
+          <code><b>POST</b> /api/students<br><b>GET</b>&nbsp; /api/students/{id}</code>
+          <div class="tags"><span>Go</span><span>SQLite</span></div>
+          <a class="arrow" href="https://github.com/Nazmul142965/students-api-usingGO" target="_blank" rel="noopener">Code</a>
         </article>
 
-        <article class="card rv">
-          <h3>Employee management</h3><p class="kind">Roles, validation, caching</p>
-<pre><span class="m">GET </span> /employees
-<span class="m">POST</span> /employees/edit/{id}
-<span class="m">POST</span> /admin/users/toggle/{id}</pre>
-          <div class="tags"><span>Spring Boot</span><span>Security</span><span>MongoDB</span><span>Docker</span></div>
-          <div class="links"><a class="link" href="https://github.com/Nazmul142965/employee-management" target="_blank" rel="noopener">Code</a></div>
+        <article class="item rv">
+          <div><h3 class="serif">Employee management</h3><p class="kind">Roles, validation, caching</p></div>
+          <code><b>GET</b>&nbsp; /employees<br><b>POST</b> /admin/users/toggle/{id}</code>
+          <div class="tags"><span>Spring Security</span><span>MongoDB</span><span>Docker</span></div>
+          <a class="arrow" href="https://github.com/Nazmul142965/employee-management" target="_blank" rel="noopener">Code</a>
         </article>
 
-        <article class="card rv">
-          <h3>SubScript</h3><p class="kind">Subscription tracker with a billing timeline</p>
-<pre><span class="m">GET </span> /timeline
-<span class="m">GET </span> /admin/users
-<span class="d">fields</span> amount, category, billingDate</pre>
-          <div class="tags"><span>Spring Boot</span><span>Security</span><span>MySQL</span><span>Docker</span></div>
-          <div class="links"><a class="link" href="https://github.com/Nazmul142965/SubScript" target="_blank" rel="noopener">Code</a></div>
+        <article class="item rv">
+          <div><h3 class="serif">SubScript</h3><p class="kind">Subscription tracker with a billing timeline</p></div>
+          <code><b>GET</b> /timeline<br><b>GET</b> /admin/users</code>
+          <div class="tags"><span>Spring Security</span><span>MySQL</span><span>Docker</span></div>
+          <a class="arrow" href="https://github.com/Nazmul142965/SubScript" target="_blank" rel="noopener">Code</a>
         </article>
 
-        <article class="card rv">
-          <h3>Club event proposals</h3><p class="kind">Proposal intake, ready for Render</p>
-<pre><span class="m">GET </span> /club-event-proposal
-<span class="m">POST</span> /club-event-proposal/save
-<span class="m">POST</span> /club-event-proposal/delete/{id}</pre>
+        <article class="item rv">
+          <div><h3 class="serif">Club event proposals</h3><p class="kind">Proposal intake, ready for Render</p></div>
+          <code><b>GET</b>&nbsp; /club-event-proposal<br><b>POST</b> /club-event-proposal/save</code>
           <div class="tags"><span>Java 21</span><span>MongoDB</span><span>Docker</span></div>
-          <div class="links"><a class="link" href="https://github.com/Nazmul142965/ClubEventProposal" target="_blank" rel="noopener">Code</a></div>
+          <a class="arrow" href="https://github.com/Nazmul142965/ClubEventProposal" target="_blank" rel="noopener">Code</a>
         </article>
 
-        <article class="card rv">
-          <h3>The Chocomuse</h3><p class="kind">Shop manager, desktop</p>
-<pre><span class="g">admin</span>    inventory · sales · revenue
-<span class="g">customer</span> catalog · cart · orders</pre>
-          <div class="tags"><span>JavaFX</span><span>MySQL</span><span>Maven</span></div>
-          <div class="links"><a class="link" href="https://github.com/Nazmul142965/The_Chocomuse" target="_blank" rel="noopener">Code</a></div>
+        <article class="item rv">
+          <div><h3 class="serif">The Chocomuse</h3><p class="kind">Shop manager, desktop</p></div>
+          <code>admin: inventory, sales, revenue<br>customer: catalog, cart, orders</code>
+          <div class="tags"><span>JavaFX</span><span>MySQL</span></div>
+          <a class="arrow" href="https://github.com/Nazmul142965/The_Chocomuse" target="_blank" rel="noopener">Code</a>
         </article>
 
-        <article class="card rv">
-          <h3>Advanced Java workbook</h3><p class="kind">14 small Spring projects</p>
-<pre>SmartCity · ProductShop
-Recap Mongo · Unit Test
-Hello Spring Security · solid</pre>
+        <article class="item rv">
+          <div><h3 class="serif">Advanced Java workbook</h3><p class="kind">14 small Spring projects</p></div>
+          <code>SmartCity, ProductShop, Recap Mongo<br>Unit Test, Spring Security, solid</code>
           <div class="tags"><span>Spring</span><span>JUnit</span><span>SOLID</span></div>
-          <div class="links"><a class="link" href="https://github.com/Nazmul142965/Advance-Java" target="_blank" rel="noopener">Code</a></div>
+          <a class="arrow" href="https://github.com/Nazmul142965/Advance-Java" target="_blank" rel="noopener">Code</a>
         </article>
 
-        <article class="card rv">
-          <h3>Data structures in C</h3><p class="kind">Written by hand</p>
-<pre>LinkedList · DoublyLinkedList
-Stack · Queue
-BinarySearchTree · BinarySearch</pre>
+        <article class="item rv">
+          <div><h3 class="serif">Data structures in C</h3><p class="kind">Written by hand</p></div>
+          <code>LinkedList, DoublyLinkedList, Stack<br>Queue, BinarySearchTree</code>
           <div class="tags"><span>C</span><span>Algorithms</span></div>
-          <div class="links"><a class="link" href="https://github.com/Nazmul142965/DSA" target="_blank" rel="noopener">Code</a></div>
+          <a class="arrow" href="https://github.com/Nazmul142965/DSA" target="_blank" rel="noopener">Code</a>
         </article>
 
-        <article class="card rv">
-          <h3>Problem solving</h3><p class="kind">Contest practice</p>
-<pre><span class="d">// CodeChef solutions in Go</span>
-<span class="d">// plus LeetCode: Nazmul14296</span></pre>
-          <div class="tags"><span>Go</span><span>CodeChef</span><span>LeetCode</span></div>
-          <div class="links"><a class="link" href="https://github.com/Nazmul142965/ProblemSolving" target="_blank" rel="noopener">Code</a><a class="link" href="https://leetcode.com/u/Nazmul14296/" target="_blank" rel="noopener">LeetCode</a></div>
-        </article>
-
-        <article class="card more rv">
-          <h3>Every repo, in one place.</h3>
-          <div class="links"><a class="link" href="https://github.com/Nazmul142965?tab=repositories" target="_blank" rel="noopener">All repositories</a></div>
+        <article class="item rv">
+          <div><h3 class="serif">Problem solving</h3><p class="kind">Contest practice</p></div>
+          <code>CodeChef solutions in Go<br>LeetCode: Nazmul14296</code>
+          <div class="tags"><span>Go</span><span>CodeChef</span></div>
+          <a class="arrow" href="https://github.com/Nazmul142965/ProblemSolving" target="_blank" rel="noopener">Code</a>
         </article>
 
       </div>
     </div>
   </section>
 
-  <!-- LEARNING LOG -->
+  <!-- LOG -->
   <section id="log">
     <div class="wrap">
-      <div class="head rv"><h2 class="disp">Learning log<i class="dot"></i></h2><p>The notes repo, from circuits to 3D. A few things I built along the way.</p></div>
+      <div class="head rv"><h2 class="serif">Learning log</h2><p>My notes repo, from circuits to 3D. A few things I built along the way.</p></div>
       <div class="logs">
-        <figure class="rv"><div class="frame"><img src="assets/work/log-alarm.webp" alt="Smart alarm system circuit" width="1400" height="653" loading="lazy"></div><figcaption>Smart alarm system<small>Embedded</small></figcaption></figure>
-        <figure class="rv"><div class="frame"><img src="assets/work/log-servo.webp" alt="Ultrasonic servo mapper circuit" width="1400" height="658" loading="lazy"></div><figcaption>Ultrasonic servo mapper<small>Embedded</small></figcaption></figure>
-        <figure class="rv"><div class="frame"><img src="assets/work/log-light.webp" alt="Motion and distance activated light circuit" width="1400" height="654" loading="lazy"></div><figcaption>Motion and distance light<small>Embedded</small></figcaption></figure>
+        <figure class="rv"><div class="shot"><img src="assets/work/log-alarm.webp" alt="Smart alarm system circuit" width="1400" height="653" loading="lazy"></div><figcaption>Smart alarm system<span>Embedded</span></figcaption></figure>
+        <figure class="rv"><div class="shot"><img src="assets/work/log-servo.webp" alt="Ultrasonic servo mapper circuit" width="1400" height="658" loading="lazy"></div><figcaption>Ultrasonic servo mapper<span>Embedded</span></figcaption></figure>
+        <figure class="rv"><div class="shot"><img src="assets/work/log-light.webp" alt="Motion and distance activated light circuit" width="1400" height="654" loading="lazy"></div><figcaption>Motion and distance light<span>Embedded</span></figcaption></figure>
       </div>
       <div class="topics rv">
-        <div class="tags"><span>Assembly</span><span>C</span><span>DSA</span><span>Advance algorithm</span><span>Golang</span><span>Networking</span><span>Operating system</span><span>SQL</span><span>Graphics</span><span>Embedded</span></div>
-        <a class="link" href="https://github.com/Nazmul142965/Things-I-learned" target="_blank" rel="noopener">Open the notes</a>
+        <div class="tags"><span>Assembly</span><span>C</span><span>DSA</span><span>Golang</span><span>Networking</span><span>Operating system</span><span>SQL</span><span>Graphics</span><span>Embedded</span></div>
+        <a class="arrow" href="https://github.com/Nazmul142965/Things-I-learned" target="_blank" rel="noopener">Open the notes</a>
       </div>
     </div>
   </section>
 
-  <!-- ABOUT + STACK -->
-  <section id="about" class="on-dark">
+  <!-- ABOUT -->
+  <section id="about">
     <div class="wrap">
-      <div class="head rv"><h2 class="disp">About<i class="dot"></i></h2></div>
-      <div class="abt">
+      <div class="head rv"><h2 class="serif">About</h2></div>
+      <div class="about">
         <div class="rv">
-          <p class="big">Computer science student at Southeast University, Dhaka. I like the parts of software people don't see.</p>
+          <p class="big">I'm a computer science student at Southeast University in Dhaka. I like the parts of software people don't see.</p>
           <p class="small">A server-side clock. A record that can't be edited afterwards. A test that fails before a user does. I write code that is easy to reason about.</p>
+          <p class="bn" lang="bn">নাজমুল হাসান</p>
         </div>
         <dl class="stack rv">
-          <div><dt>Languages</dt><dd><b>Java</b> <b>Go</b> C · C++ · Python · SQL</dd></div>
-          <div><dt>Backend</dt><dd><b>Spring Boot</b> <b>Spring Security</b> REST · JUnit</dd></div>
-          <div><dt>Data</dt><dd><b>MongoDB</b> <b>Redis</b> MySQL</dd></div>
-          <div><dt>Delivery</dt><dd><b>Docker</b> <b>Render</b> <b>Vercel</b> Git</dd></div>
-          <div><dt>AI</dt><dd><b>YOLOv8</b> computer vision · transformers</dd></div>
-          <div><dt>Systems</dt><dd><b>OpenGL</b> sockets · OS · embedded · assembly</dd></div>
+          <div><dt>Languages</dt><dd>Java, Go <span>· C, C++, Python, SQL</span></dd></div>
+          <div><dt>Backend</dt><dd>Spring Boot, Spring Security <span>· REST, JUnit</span></dd></div>
+          <div><dt>Data</dt><dd>MongoDB, Redis <span>· MySQL</span></dd></div>
+          <div><dt>Delivery</dt><dd>Docker, Render, Vercel <span>· Git</span></dd></div>
+          <div><dt>AI</dt><dd>YOLOv8 <span>· computer vision, transformers</span></dd></div>
+          <div><dt>Systems</dt><dd>OpenGL <span>· sockets, OS, embedded, assembly</span></dd></div>
         </dl>
       </div>
     </div>
@@ -498,51 +462,47 @@ BinarySearchTree · BinarySearch</pre>
   <!-- CONTACT -->
   <section id="contact">
     <div class="wrap">
-      <h2 class="disp rv">Say hello<i class="dot" style="background:var(--ink)"></i></h2>
-      <a class="mail rv" href="mailto:afnannazmul@gmail.com">afnannazmul@gmail.com</a>
-      <div class="links rv">
-        <a class="btn" href="https://github.com/Nazmul142965" target="_blank" rel="noopener">GitHub</a>
-        <a class="btn" href="https://www.linkedin.com/in/nazmul-hasan-2881562bb/" target="_blank" rel="noopener">LinkedIn</a>
-        <a class="btn" href="https://leetcode.com/u/Nazmul14296/" target="_blank" rel="noopener">LeetCode</a>
-        <a class="btn" href="Nazmul_Hasan_Resume.pdf" download>Résumé</a>
+      <div class="cta-box rv">
+        <h2 class="serif">Let's build something <em>that lasts.</em></h2>
+        <a class="mail" href="mailto:afnannazmul@gmail.com">afnannazmul@gmail.com</a>
+        <div class="cta">
+          <a class="btn" href="https://github.com/Nazmul142965" target="_blank" rel="noopener">GitHub</a>
+          <a class="btn" href="https://www.linkedin.com/in/nazmul-hasan-2881562bb/" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="btn" href="https://leetcode.com/u/Nazmul14296/" target="_blank" rel="noopener">LeetCode</a>
+          <a class="btn solid" href="Nazmul_Hasan_Resume.pdf" download>Résumé</a>
+        </div>
       </div>
     </div>
   </section>
 
 </main>
 
-<footer class="on-dark"><div class="wrap"><span>© 2026 Nazmul Hasan · Dhaka, Bangladesh</span><span>Built with Claude</span></div></footer>
+<footer><div class="wrap"><span>© 2026 Nazmul Hasan · Dhaka, Bangladesh</span><span>Built with Claude</span></div></footer>
 
 <script>
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // sun rail follows scroll
-  (function(){
-    var sun = document.getElementById('sun'), root = document.documentElement;
-    function upd(){
-      var max = root.scrollHeight - innerHeight;
-      root.style.setProperty('--p', max > 0 ? Math.min(1, Math.max(0, scrollY / max)) : 0);
-    }
-    addEventListener('scroll', upd, { passive:true }); addEventListener('resize', upd); upd();
-  })();
+  document.getElementById('themeToggle').addEventListener('click', function(){
+    var r = document.documentElement, light = r.getAttribute('data-theme') === 'light';
+    if(light) r.removeAttribute('data-theme'); else r.setAttribute('data-theme','light');
+    try{ localStorage.setItem('theme_v4', light ? 'dark' : 'light'); }catch(e){}
+  });
 
-  // reveal + active nav
   (function(){
     var rv = document.querySelectorAll('.rv');
     if(!('IntersectionObserver' in window) || reduce){ rv.forEach(function(e){ e.classList.add('in'); }); return; }
     var io = new IntersectionObserver(function(es){
       es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
-    }, { threshold:0.1 });
+    }, { threshold:0.08 });
     rv.forEach(function(e){ io.observe(e); });
 
-    var links = document.querySelectorAll('nav a:not(.cv)');
+    var links = document.querySelectorAll('nav a.l');
     var nav = new IntersectionObserver(function(es){
       es.forEach(function(e){ if(e.isIntersecting) links.forEach(function(a){ a.classList.toggle('on', a.getAttribute('href') === '#' + e.target.id); }); });
     }, { rootMargin:'-45% 0px -50% 0px' });
     document.querySelectorAll('section[id]').forEach(function(s){ nav.observe(s); });
   })();
 
-  // live repo count (cached for an hour)
   (function(){
     var el = document.getElementById('repoCount'), KEY = 'gh_repos_v3';
     function show(n){ if(typeof n === 'number' && n > 0) el.textContent = n; }
